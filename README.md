@@ -6,7 +6,7 @@ A widget to display the number of active scratchpads in a wayland session.
 Most will be preinstalled with any OS.
 
   - `gum` - available via most package managers (apt, pacman, duf, apk, pkg)
-
+  - `kitty` - the best terminal. Your package manager will have it :)
 ## Installation
 
 ### Automated Install
