@@ -3,8 +3,10 @@ import subprocess
 import sys
 from argparse import ArgumentParser
 
+ENTER="\n"
 KEYS = ["id", "pid", "name", "app_id", "visible", "sticky", "shell", "marks", "focused", "inhibit_idle"]
 ICON = u"\uFBB6"
+TUI = "./tui.sh"
 def generate_tree():
     _data = subprocess.run(["swaymsg", "-t", "get_tree"], stdout=subprocess.PIPE).stdout.decode("utf-8")
     data = json.loads(_data)
@@ -20,9 +22,16 @@ def find_scratchpads2(waybar=False):
         return (0, [])
     node_filter = lambda _node: {k: _node[k] for k in KEYS}
     scratchpads = [node_filter(node)for node in root]
-    if waybar:
+    if waybar == True:
         return f"{ICON} {len(scratchpads)}\n{ICON} Active number of scratchpads"
-    return (len(scratchpads), scratchpads)
+    else:
+        windows = [f"{node['name']}" for node in scratchpads]
+        #return a string for bash array
+        sys.stdout.write("\n".join([f"{node['name']}" for node in scratchpads]).strip())
+        #return 
+
+def focus_scratchpad(name):
+    subprocess.run(["swaymsg", f"[title=\"{name}\"] focus"])
 
 if __name__ == "__main__":
     parser = ArgumentParser()
@@ -31,4 +40,4 @@ if __name__ == "__main__":
     if args.waybar:
         print(find_scratchpads2(waybar=True))
     else:
-        print(find_scratchpads2())
+        find_scratchpads2()
