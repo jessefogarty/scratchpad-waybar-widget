@@ -3,7 +3,6 @@ import subprocess
 import sys
 from argparse import ArgumentParser
 
-ENTER="\n"
 KEYS = ["id", "pid", "name", "app_id", "visible", "sticky", "shell", "marks", "focused", "inhibit_idle"]
 ICON = u"\uFBB6"
 TUI = "./tui.sh"
@@ -25,9 +24,9 @@ def find_scratchpads2(waybar=False):
     if waybar == True:
         return f"{ICON} {len(scratchpads)}\n{ICON} Active number of scratchpads"
     else:
-        windows = [f"{node['name']}" for node in scratchpads]
-        #return a string for bash array
-        sys.stdout.write("\n".join([f"{node['name']}" for node in scratchpads]).strip())
+        windows = "\n".join([f"{node['name']}" for node in scratchpads]).strip()
+
+        sys.stdout.write(windows)
         #return 
 
 def focus_scratchpad(name):
