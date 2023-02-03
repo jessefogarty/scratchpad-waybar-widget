@@ -3,6 +3,5 @@
         "interval": 2,
         "exec": "python3 ~/.config/waybar/scripts/scratchpads.py --waybar",
         "format": "{}",
-        "on-click": "kitty --session scratchpads.conf"
-        //"on-click": "xfce4-terminal -e '/home/unkwn1/gits/scratchpad-waybar-widget/tui.sh'"
+        "on-click": "sh ~/.config/waybar/scripts/scratch-wofi.sh"
     },
